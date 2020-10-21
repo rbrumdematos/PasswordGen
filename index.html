@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+body{
+    background-color:#0faf44;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}   
+#maincontainer{
+
+}
+
+</style>
+
+<body>
+
+    <div id="maincontainer">
+
+            <label for="fname">Enter password length </label>
+            <input type="number" id="fNumber" name="fname" min="4" max="64" value="8"><br><br>
+            <label for="Caracters">Select Special Characters</label><br>
+            <input type="checkbox" id="Numbers" name="Caracters" value="Numbers">
+            <label for="Numbers"> Numbers</label><br>
+             <input type="checkbox" id="UpperCase" name="Caracters" value="UpperCase">
+              <label for="UpperCase"> UpperCase</label><br>
+              <input type="checkbox" id="LowerCase" name="Caracters" value="LowerCase">
+              <label for="LowerCase"> LowerCase</label><br>
+              <input type="checkbox" id="SC" name="Caracters" value="SpecialCharacters">
+             <label for="Special Characters"> Special Characters</label><br><br>
+                <button id="create">Create Password</button>
+
+          <h1></h1>
+    </div>
+
+</body>
+
+<script>
+
+    const numbers = document.getElementById('Numbers');
+    const upperCase = document.getElementById('UpperCase');
+    const lowerCase = document.getElementById('LowerCase');
+    const sc = document.getElementById('SC');
+    const fNumber = document.getElementById('fNumber');
+    const h1 = document.querySelector('h1');
+
+    const uAlphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+    const  lAlphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+    const digits = [ "0","1","2","3","4","5","6","7","8","9"]
+    const scarray = [ "!","@","#","$","&","*"]
+
+    
+
+    function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+
+    function createPassword(){
+        let i=0;
+        let password ="";
+        let arrayValues=[];
+        let randomSeed=0;
+
+        if (numbers.checked)
+        {arrayValues=arrayValues.concat(numbers);}
+
+        if (lowerCase.checked)
+        {arrayValues=arrayValues.concat(lAlphabet);}
+
+        if (upperCase.checked)
+        {arrayValues=arrayValues.concat(uAlphabet);}
+
+        if (sc.checked)
+        {arrayValues=arrayValues.concat(scarray);}
+
+        
+        for (i=0;i<fNumber.value;i++)
+        {
+            randomSeed = getRndInteger(0,(arrayValues.length-1));
+            password=password.concat(arrayValues[randomSeed]);
+        }
+        h1.textContent=password;
+        console.log(password);   
+
+        
+    }
+
+    document.getElementById("create").addEventListener('click',createPassword);
+
+
+
+</script>
+
+
+</html>
